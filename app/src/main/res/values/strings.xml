@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">V2-BCP-Android</string>
+    <string name="bcp_qa">bcp_qa</string>
+    <string name="bcp_dev">bcp_dev</string>
+    <string name="bcp_debug">bcp_debug</string>
+    <string name="bcp_uat">bcp_uat</string>
+
+</resources>

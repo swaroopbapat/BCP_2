@@ -1,0 +1,137 @@
+apply plugin: 'com.android.application'
+
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+
+
+android {
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    signingConfigs {
+        config {
+            keyAlias 'bcpmobile'
+            keyPassword 'mail_123'
+            storeFile file('bcpmobile.keystore')
+            storePassword 'mail_123'
+        }
+        android {
+            lintOptions {
+                abortOnError false
+            }
+        }
+
+    }
+
+    compileSdkVersion 22
+    buildToolsVersion "22.0.0"
+
+    defaultConfig {
+        applicationId "com.v2solutions.bcpmobile"
+        minSdkVersion 16
+        targetSdkVersion 22
+        signingConfig signingConfigs.config
+        versionCode 1
+        versionName "1.0"
+
+        manifestPlaceholders = [launcherIcon: "ic_launcher",
+                                webSiteName : "",
+                                appName     : "bcpmobile_dev",
+                                appPackage  : "com.v2solutions.bcpmobile"]
+
+    }
+    buildTypes {
+        def BOOLEAN = "boolean"
+        def TRUE = "true"
+        def FALSE = "false"
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            signingConfig signingConfigs.config
+        }
+    }
+
+    productFlavors {
+
+        DEV {
+            versionCode 160128_1124
+            versionName "SNAPSHOT"
+            manifestPlaceholders =
+                    [
+                            launcherIcon: "@drawable/ic_launcher_dev",
+                            webSiteName : "",
+                            appPackage  : "com.v2solutions.bcpmobile",
+                    ]
+            applicationId = "com.v2solutions.bcpmobile.DEV"
+        }
+        QA {
+            versionCode 1140
+            versionName "SNAPSHOT"
+            manifestPlaceholders =
+                    [
+                            launcherIcon: "@drawable/ic_launcher_qa",
+                            webSiteName : "http://54.149.11.15",
+                            appPackage  : "com.v2solutions.bcpmobile",
+                            appName     : "bcp_qa"
+                    ]
+            applicationId = "com.v2solutions.bcpmobile.QA"
+        }
+        UAT {
+            versionCode 1138
+            versionName "v1.0.13"
+            manifestPlaceholders =
+                    [
+                            launcherIcon: "@drawable/ic_launcher_uat",
+                            webSiteName : "http://54.149.11.15",
+                            appPackage  : "com.v2solutions.bcpmobile",
+                            appName     : "bcp_uat"
+                    ]
+            applicationId = "com.v2solutions.bcpmobile.UAT"
+        }
+        PROD {
+            versionCode 1149
+            versionName "1.0"
+            manifestPlaceholders =
+                    [
+                            launcherIcon: "@drawable/ic_launcher",
+                            webSiteName : "http://54.149.11.15",
+                            appPackage  : "com.v2solutions.bcpmobile",
+                            appName     : "bcp_prod"
+
+                    ]
+            applicationId = "com.v2solutions.bcpmobile.PROD"
+        }
+        DEBUG {
+            manifestPlaceholders =
+                    [
+                            launcherIcon: "@drawable/ic_launcher_dev",
+                            webSiteName : "http://54.149.11.15",
+                            appPackage  : "com.v2solutions.bcpmobile",
+                            appName     : "bcp_debug"
+                    ]
+            applicationId = "com.v2solutions.bcpmobile.DEBUG"
+        }
+    }
+    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/layout-hdpi'] } }
+}
+
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+
+    compile 'com.android.support:appcompat-v7:22.0.0'
+}
